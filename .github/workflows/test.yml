@@ -21,24 +21,13 @@ jobs:
       fail-fast: false
       matrix:
         environment: |-
-            ${{ fromJSON('{
-                "dev": [
+            ${{ fromJSON('[
                     "a",
                     "b",
                     "c",
                     "d"
-                ],
-                "stg": [
-                    "e",
-                    "f",
-                    "g"
-                ],
-                "prd": [
-                    "h",
-                    "i",
-                    "j"
                 ]
-            }')[inputs.environment] }}
+            }') }}
     steps:
       - name: Echo
         run: |
