@@ -1,0 +1,44 @@
+name: "Test"
+
+on:
+    workflow_dispatch:
+      inputs:
+        environment:
+          description: "Environment"
+          required: true
+          type: choice
+          default: dev
+          options:
+            - dev
+            - stg
+            - prd
+jobs:
+  action:
+    name: Action
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        environment: |-
+            ${{ fromJSON('{
+                "dev": [
+                    "a",
+                    "b",
+                    "c",
+                    "d"
+                ],
+                "stg": [
+                    "e",
+                    "f",
+                    "g"
+                ],
+                "prd": [
+                    "h",
+                    "i",
+                    "j"
+                ]
+            }')[inputs.environment] }}
+    steps:
+      - name: Echo
+        run: |
+          echo ${{ matrix.environment }}
