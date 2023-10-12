@@ -12,6 +12,7 @@ on:
             - dev
             - stg
             - prd
+            - nothing
 jobs:
   action:
     name: Action
